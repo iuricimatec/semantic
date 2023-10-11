@@ -148,10 +148,16 @@ let AssociaPalavra = (function () {
         getElement('#word').value = "";
         const vetores = await getModel(palavra_sonda, palavra_respondida);
         if (!vetores.vec_2) {
-            getElement('#word-error').innerHTML = `A palavra: ${palavra_respondida} não consta no vocabulário.`;
+	    getElement('#word-error').innerHTML = `A palavra: ${palavra_respondida} não consta no vocabulário.<br><br>Uma nova palavra será sorteada em 2s.`;
             getElement("#word-error").style.display = "block";
             time_in = new Date();
-            return false;
+	    setTimeout(() => {
+                palavra_sonda = getNewWord();
+                getElement('#sonda').innerHTML =  `${palavra_sonda}`;
+                getElement("#word-error").style.display = "none";
+                return false;
+
+            }, 2000);
 	}
         const similaridade = getCosSim(vetores.vec_1, vetores.vec_2);
         loadTest(similaridade, time_out, time_in, palavra_sonda, palavra_respondida);
