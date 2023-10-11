@@ -45,7 +45,7 @@ def upload_embedding():
     cur = con.cursor()
     con.execute("DELETE FROM embedding")
     # with open("glove_s100.txt", "r", encoding="utf-8") as w2v_file:
-    with open("words-new.txt", "r", encoding="utf-8") as w2v_file:
+    with open("words20231011.txt", "r", encoding="utf-8") as w2v_file:
 
         _ = w2v_file.readline()
         for n, line in enumerate(w2v_file):
