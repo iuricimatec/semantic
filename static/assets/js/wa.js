@@ -29,17 +29,44 @@ function getCosSim(f1, f2) {
     return dot(f1, f2) / (mag(f1) * mag(f2));
 }
 
+
+// Function to shuffle the array (Fisher-Yates shuffle algorithm)
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+   
+  
+  
 function getNewWord() {
+    console.log('get new word');
+
+    // This code first generates an array of numbers from 1 to 100, 
+    // shuffles it using the Fisher-Yates shuffle algorithm, and then accesses an element from the shuffled array. 
+    // Remember that JavaScript arrays are 0-based, so if you want to access the first element, you use perm[i - 1].
+
+    // Generate a random permutation of the array
+    const perm = shuffleArray(SelectWords);
+    // console.log(perm);
+
+    // define the index to access (in this case a random number)
     const num = Math.floor(Math.random() * (SelectWords.length - 1)) + 1;
-    console.log(num)
-    console.log(Math.random())
-    const nova_palavra = SelectWords[num].toLowerCase();
+    // console.log(num)
+    // console.log(Math.random())
+    const nova_palavra = perm[num].toLowerCase();
+    // if (!lista_palavras_sonda.includes(nova_palavra)) {
+    //     const perm = shuffleArray(SelectWords);
+    //    const nova_palavra = perm1[num].toLowerCase();
+    // }
     lista_palavras_sonda.push(nova_palavra);
     num_de_palavras += 1;
     getElement('#sonda').innerHTML = nova_palavra;
     time_in = new Date();
-    console.log(num_de_palavras);
-    console.log(nova_palavra);
+    // console.log(num_de_palavras);
+    // console.log(nova_palavra);
     return nova_palavra;
 }
 
