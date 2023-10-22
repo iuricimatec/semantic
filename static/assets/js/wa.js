@@ -53,14 +53,21 @@ function getNewWord() {
     // console.log(perm);
 
     // define the index to access (in this case a random number)
-    const num = Math.floor(Math.random() * (SelectWords.length - 1)) + 1;
+    var num = Math.floor(Math.random() * (SelectWords.length - 1)) + 1;
     // console.log(num)
     // console.log(Math.random())
-    const nova_palavra = perm[num].toLowerCase();
+    var nova_palavra = perm[num].toLowerCase();
     // if (!lista_palavras_sonda.includes(nova_palavra)) {
     //     const perm = shuffleArray(SelectWords);
     //    const nova_palavra = perm1[num].toLowerCase();
     // }
+    console.log('verificar palavra')
+    while (lista_palavras_sonda.indexOf(nova_palavra) !== -1) {
+        console.log('ERRO: duplicada!')
+        num = Math.floor(Math.random() * (SelectWords.length - 1)) + 1;
+        nova_palavra = perm[(num+1)/2]
+    }
+
     lista_palavras_sonda.push(nova_palavra);
     num_de_palavras += 1;
     getElement('#sonda').innerHTML = nova_palavra;
