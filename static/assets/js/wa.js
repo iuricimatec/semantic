@@ -3,7 +3,7 @@
  * pesquisar melhor forma de identificar uma jogador
  * Cálculo do sorteio baseado em frequência**/
 
-const num_max_de_palavras = 100;
+const num_max_de_palavras = 99;
 var num_de_palavras = 0;
 var lista_palavras_sonda = [];
 var lista_resultados = [];
@@ -198,7 +198,7 @@ let AssociaPalavra = (function () {
     }
 
     async function loadTest(similaridade, time_out, time_in, sonda, respondida) {
-        const id = 0;
+        const id = num_de_palavras;
         const tempo_de_resposta = time_out.getTime() - time_in.getTime();
         let resultado = new Resultado(id, getDate(), tempo_de_resposta, sonda,
             respondida, similaridade);
