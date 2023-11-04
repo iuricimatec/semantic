@@ -1,4 +1,4 @@
-SelectWords = [
+selectedWords = [
     "Cabeça",
     "Verde",
     "Água",

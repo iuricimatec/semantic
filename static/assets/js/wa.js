@@ -3,11 +3,14 @@
  * pesquisar melhor forma de identificar uma jogador
  * Cálculo do sorteio baseado em frequência**/
 
-const num_max_de_palavras = 99;
+const num_max_de_palavras = 9;
 var num_de_palavras = 0;
 var lista_palavras_sonda = [];
 var lista_resultados = [];
 var time_in = new Date;
+
+//var selectedWords = '<%= selectedWords %>';
+console.log('selectedWords ',selectedWords);
 
 function getElement(q) {
     return document.querySelector(q);
@@ -26,6 +29,9 @@ function dot(f1, f2) {
 }
 
 function getCosSim(f1, f2) {
+    if (!Array.isArray(f1) || !Array.isArray(f2)) {
+        throw new Error("f1 and f2 should be arrays");
+    }
     return dot(f1, f2) / (mag(f1) * mag(f2));
 }
 
@@ -42,18 +48,18 @@ function shuffleArray(array) {
   
   
 function getNewWord() {
-    console.log('get new word');
+    console.log('go get new word');
 
     // This code first generates an array of numbers from 1 to 100, 
     // shuffles it using the Fisher-Yates shuffle algorithm, and then accesses an element from the shuffled array. 
     // Remember that JavaScript arrays are 0-based, so if you want to access the first element, you use perm[i - 1].
 
     // Generate a random permutation of the array
-    const perm = shuffleArray(SelectWords);
+    const perm = shuffleArray(selectedWords);
     // console.log(perm);
 
     // define the index to access (in this case a random number)
-    var num = Math.floor(Math.random() * (SelectWords.length - 1)) + 1;
+    var num = Math.floor(Math.random() * (selectedWords.length - 1)) + 1;
     // console.log(num)
     // console.log(Math.random())
     var nova_palavra = perm[num].toLowerCase();
@@ -64,7 +70,7 @@ function getNewWord() {
     console.log('verificar palavra')
     while (lista_palavras_sonda.indexOf(nova_palavra) !== -1) {
         console.log('ERRO: duplicada!')
-        num = Math.floor(Math.random() * (SelectWords.length - 1)) + 1;
+        num = Math.floor(Math.random() * (selectedWords.length - 1)) + 1;
         nova_palavra = perm[(num+1)/2]
     }
 
@@ -182,7 +188,6 @@ let AssociaPalavra = (function () {
         getElement('#word').value = "";
         const vetores = await getModel(palavra_sonda, palavra_respondida);
         console.log('vetores', vetores);
-       
         if (!vetores.vec_2) {
 	        getElement('#word-error').innerHTML = `A palavra: ${palavra_respondida} não consta no vocabulário.<br><br>Uma nova palavra será sorteada em 2s.`;
             getElement("#word-error").style.display = "block";
