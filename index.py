@@ -76,7 +76,7 @@ def model2(word_1, word_2):
         }
 
         print('w1: ',word_1, 'w2: ', word_2)
-        
+        print(result);        
         return jsonify(result)
     except Exception as e:
         print(e)

@@ -181,6 +181,8 @@ let AssociaPalavra = (function () {
 
         getElement('#word').value = "";
         const vetores = await getModel(palavra_sonda, palavra_respondida);
+        console.log('vetores', vetores);
+       
         if (!vetores.vec_2) {
 	        getElement('#word-error').innerHTML = `A palavra: ${palavra_respondida} não consta no vocabulário.<br><br>Uma nova palavra será sorteada em 2s.`;
             getElement("#word-error").style.display = "block";
