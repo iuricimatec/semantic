@@ -1,4 +1,4 @@
-selectedWords = [
+const selectedWords = [
     "Cabeça",
     "Verde",
     "Água",
@@ -100,3 +100,5 @@ selectedWords = [
     "Mulher",
     "Bronca",
 ]
+
+module.exports = selectedWords;

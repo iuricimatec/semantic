@@ -9,7 +9,7 @@ const util = require('util');
 const db = new sqlite3.Database('data.db');
 const dbGet = util.promisify(db.get.bind(db));
 
-const selectedWords = require('./modules/selectedWords.js');
+var selectedWords = require('./modules/selectedWords.js');
 
 app.use(bodyParser.json());
 
@@ -17,6 +17,17 @@ app.use(bodyParser.json());
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
+  // Function to shuffle the array (Fisher-Yates shuffle algorithm)
+  // it shuffles array selectedWords using the Fisher-Yates shuffle algorithm, and then accesses an element from the shuffled array. 
+  // Remember that JavaScript arrays are 0-based, so if you want to access the first element, you use perm[i - 1].
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+  selectedWords = shuffleArray(selectedWords);
   res.render('index', { selectedWords });
 });
 
@@ -99,6 +110,6 @@ app.use((req, res) => {
   res.status(404).send('Page not found');
 });
 
-app.listen(8000, '127.0.0.1', () => {
-  console.log('Server is running on port 8000');
+app.listen(3002, () => {
+  // console.log('Server is running on port');
 });
