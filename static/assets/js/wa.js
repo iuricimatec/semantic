@@ -9,7 +9,7 @@ var lista_palavras_sonda = [];
 var lista_resultados = [];
 var time_in = new Date;
 
-//var selectedWords = '<%= selectedWords %>';
+const selectedWords = '<%= selectedWords %>'.split(',');
 console.log('selectedWords ',selectedWords);
 
 function getElement(q) {

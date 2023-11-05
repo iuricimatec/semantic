@@ -9,18 +9,15 @@ const util = require('util');
 const db = new sqlite3.Database('data.db');
 const dbGet = util.promisify(db.get.bind(db));
 
+const selectedWords = require('./modules/selectedWords.js');
+
 app.use(bodyParser.json());
 
 // Set the view engine to EJS
 app.set('view engine', 'ejs');
 
-
 app.get('/', (req, res) => {
-  // res.sendFile(path.join(__dirname, 'static', 'index.html'));
-  // console.log(selectedWords)
-  // res.render('index', { selectedWords });
-  res.render('index');
-
+  res.render('index', { selectedWords });
 });
 
 app.use('/assets', express.static(path.join(__dirname, 'static', 'assets')));
