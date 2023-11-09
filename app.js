@@ -52,8 +52,8 @@ app.get('/model/:word', (req, res) => {
 
 
 app.get('/model2/:word_1/:word_2', async (req, res) => {
-  const word1 = req.params.word_1;
-  const word2 = req.params.word_2;
+  const word1 = req.params.word_1.toLocaleLowerCase();
+  const word2 = req.params.word_2.toLocaleLowerCase();
 
   // console.log('Running Function model2');
   // console.log('w1:', word1, 'w2:', word2);
