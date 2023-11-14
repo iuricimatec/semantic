@@ -1,20 +1,26 @@
 const express = require('express');
 const app = express();
+const path = require('path');
+
 const sqlite3 = require('sqlite3').verbose();
 const bodyParser = require('body-parser');
-const path = require('path');
+app.use(bodyParser.json());
+
 const fs = require('fs');
 const util = require('util');
 
 const db = new sqlite3.Database('data.db');
 const dbGet = util.promisify(db.get.bind(db));
 
-var selectedWords = require('./modules/selectedWords.js');
+// Serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(bodyParser.json());
+// app.use('/assets', express.static(path.join(__dirname, 'static', 'assets')));
 
 // Set the view engine to EJS
 app.set('view engine', 'ejs');
+
+var selectedWords = require('./modules/selectedWords.js');
 
 app.get('/', (req, res) => {
   // Function to shuffle the array (Fisher-Yates shuffle algorithm)
@@ -31,7 +37,6 @@ app.get('/', (req, res) => {
   res.render('index', { selectedWords });
 });
 
-app.use('/assets', express.static(path.join(__dirname, 'static', 'assets')));
 
 app.get('/model/:word', (req, res) => {
   const word = req.params.word;
@@ -48,7 +53,7 @@ app.get('/model/:word', (req, res) => {
     const data = JSON.parse(row.vector); // Deserialize data using JSON.parse
     res.json(data);
   });
-});
+}); 
 
 
 app.get('/model2/:word_1/:word_2', async (req, res) => {
