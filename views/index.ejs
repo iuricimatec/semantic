@@ -199,10 +199,10 @@
                 const vetores = await getModel(palavra_sonda, palavra_respondida);
                 num_de_palavras+=1;
                 if (!vetores.vec_2) {                    
-                    loadTest(0, time_out, time_in, palavra_sonda, palavra_respondida);
                     getElement('#word-error').innerHTML = `A palavra: ${palavra_respondida} não consta no vocabulário.<br><br>Uma nova palavra será sorteada em 2s.`;
                     getElement("#word-error").style.display = "block";                    
-                    setTimeout(() => {                        
+                    setTimeout(() => {     
+                        loadTest(0, time_out, time_in, palavra_sonda, palavra_respondida);                   
                         getElement('#sonda').innerHTML =  `${palavra_sonda}`.toLowerCase();
                         getElement("#word-error").style.display = "none";                                      
                   
